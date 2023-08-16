@@ -1,5 +1,6 @@
 const con = document.querySelector('.container');
 const te = document.querySelector('.te');
+const result = document.querySelector('.result')
 const number =document.createElement('button');
 number.innerText=1;
 con.appendChild(number);
@@ -54,31 +55,45 @@ const multiply = function(vaule1,vaule2) {
 }
 console.log(add(8,7))
 let liveNumber=0;
-number.addEventListener('click',()=>{
+function try1(){
   liveNumber++;
   const numberText1 =document.createElement('span');
   numberText1.innerText = '1';
   te.appendChild(numberText1)
   console.log(liveNumber)
-})
-number2.addEventListener('click',()=>{
+}
+number.addEventListener('click',try1)
+function try2(){
   liveNumber= liveNumber+2;
   const numberText2 =document.createElement('span');
   numberText2.innerText = '2';
   te.appendChild(numberText2)
   console.log(liveNumber)
-})
-plus.addEventListener('click',()=>{ 
+}
+let liveNumber2=0;
+number2.addEventListener('click',try2)
+function plusFunction(){
   const plusText =document.createElement('span');
   plusText.innerText = '+';
-  te.appendChild(plusText)
-})
-
-
-eq.addEventListener('click',()=>{
+  te.appendChild(plusText);
+  number.removeEventListener('click',try1)
+  number.addEventListener('click',afterPlus)
+}
+function afterPlus(){
+  const numberText1 =document.createElement('span');
+  numberText1.innerText = '1';
+te.appendChild(numberText1)
+  liveNumber2++;
+  console.log(liveNumber2)
+}
+plus.addEventListener('click',plusFunction)
+function eqFunction(){
   const eqText =document.createElement('span');
   eqText.innerText = '=';
   te.appendChild(eqText)
-
-  
-})
+  te.remove();
+  const resultShow = document.createElement('span');
+  resultShow.innerText= (add(liveNumber,liveNumber2))
+result.appendChild(resultShow)
+}
+eq.addEventListener('click',eqFunction)
